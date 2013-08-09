@@ -3,12 +3,14 @@
 TOP_DIR=$(cd $(dirname "$0") && pwd)
 cd $TOP_DIR
 
-yum -y install gcc gcc-c++ python-devel python-setuptools m2crypto pkgconfig
+yum -y install gcc gcc-c++ make python-devel python-setuptools m2crypto
 
-cd $TOP_DIR/rpms
-rpm -hiv openpgm-5.1.118-3.el6.x86_64.rpm
-rpm -hiv zeromq3-3.2.3-1.el6.x86_64.rpm
-rpm -hiv zeromq3-devel-3.2.3-1.el6.x86_64.rpm
+tar -xzf zeromq-3.2.3.tar.gz &&
+    cd zeromq-3.2.3 &&
+    ./configure &&
+    make &&
+    make install &&
+    cd $TOP_DIR && rm -fr zeromq-3.2.3
 
 cd $TOP_DIR/pips
 pip --version >/dev/null 2>&1 || (

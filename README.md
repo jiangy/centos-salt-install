@@ -2,7 +2,7 @@ centos-salt-install
 ===================
 
 A shell script support to install the latest [salt](http://saltstack.com)
-on x86\_64 centos 6.x. This script has tested on min installed 6.4.
+on CentOS. This script has tested on min installed x86\_64 CentOS 6.4.
 
 ### 1. Download and install
 
@@ -17,7 +17,8 @@ Use the following command to create the salt root directory, open the
 corresponding firewall ports and start salt-master.
 
     mkdir -p /srv/salt
-    sed -i '/22/ a \-A INPUT -m state --state NEW -p tcp --dport 4505:4506 -j ACCEPT' /etc/sysconfig/iptables
+    sed -i '/22/ a \-A INPUT -m state --state NEW -p tcp --dport 4505:4506 -j ACCEPT' \
+        /etc/sysconfig/iptables
     service iptables restart
     chkconfig salt-master on && service salt-master start
 
