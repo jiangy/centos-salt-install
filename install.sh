@@ -3,6 +3,9 @@
 TOP_DIR=$(cd $(dirname "$0") && pwd)
 cd $TOP_DIR
 
+setenforce 0
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
+
 yum -y install gcc gcc-c++ make python-devel python-setuptools m2crypto
 
 tar -xzf zeromq-3.2.3.tar.gz &&
