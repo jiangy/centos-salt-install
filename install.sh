@@ -25,7 +25,7 @@ pip --version >/dev/null 2>&1 || (
 
 pip install MarkupSafe-0.18.tar.gz PyYAML-3.10.zip \
     pycrypto-2.6.tar.gz msgpack-python-0.3.0.tar.gz \
-    pyzmq-13.1.0.zip Jinja2-2.7.tar.gz salt-0.16.2.tar.gz
+    pyzmq-13.1.0.zip Jinja2-2.7.tar.gz salt-0.16.3.tar.gz
 
 cd $TOP_DIR
 [ -d /etc/salt ] || cp -r conf /etc/salt
