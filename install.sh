@@ -6,21 +6,30 @@ cd $TOP_DIR
 setenforce 0
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
 
-yum -y install gcc gcc-c++ make python-devel python-setuptools m2crypto
+yum -y remove python-setuptools python-crypto python-jinja2
+yum -y install gcc gcc-c++ make python-devel m2crypto
 
-tar -xzf zeromq-3.2.3.tar.gz &&
+[ -f /usr/local/lib/libzmq.so ] || (
+    tar -xzf zeromq-3.2.3.tar.gz &&
     cd zeromq-3.2.3 &&
     ./configure &&
     make &&
     make install &&
-    cd $TOP_DIR && rm -fr zeromq-3.2.3
+    cd $TOP_DIR && rm -fr zeromq-3.2.3 )
 
 cd $TOP_DIR/pips
-pip --version >/dev/null 2>&1 || (
+[ -f /usr/bin/easy_install ] || (
+    tar -xzf setuptools-0.9.8.tar.gz &&
+    cd setuptools-0.9.8 &&
+    python setup.py install &&
+    cd $TOP_DIR/pips &&
+    rm -fr setuptools-0.9.8 )
+
+[ -f /usr/bin/pip ] || (
     tar -xzf pip-1.4.tar.gz &&
     cd pip-1.4 &&
     python setup.py install &&
-    cd $TOP_DIR &&
+    cd $TOP_DIR/pips &&
     rm -fr pip-1.4 )
 
 pip install MarkupSafe-0.18.tar.gz PyYAML-3.10.zip \
