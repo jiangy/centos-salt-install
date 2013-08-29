@@ -19,11 +19,11 @@ yum -y install gcc gcc-c++ make python-devel m2crypto
 
 cd $TOP_DIR/pips
 [ -f /usr/bin/easy_install ] || (
-    tar -xzf setuptools-0.9.8.tar.gz &&
-    cd setuptools-0.9.8 &&
+    tar -xzf setuptools-1.1.tar.gz &&
+    cd setuptools-1.1 &&
     python setup.py install &&
     cd $TOP_DIR/pips &&
-    rm -fr setuptools-0.9.8 )
+    rm -fr setuptools-1.1 )
 
 [ -f /usr/bin/pip ] || (
     tar -xzf pip-1.4.tar.gz &&
